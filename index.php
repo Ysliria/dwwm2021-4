@@ -32,7 +32,7 @@ $mordred   = [
     'atk'        => 40
 ];
 
-/*switch ($arthur['profession']) {
+switch ($arthur['profession']) {
     case 'Chevalier':
         echo 'Sir ! On en a gros! <br>';
         break;
@@ -47,13 +47,7 @@ $mordred   = [
         break;
     default:
         echo 'Où elle est la poulette ? <br>';
-}*/
-
-// Perceval attaque Mordred
-//while ($mordred['pv'] > 0) {
-//    $mordred['pv'] -= $perceval['atk'];
-//}
-
+}
 
 /**
  * @param array $attaquant
@@ -62,6 +56,8 @@ $mordred   = [
  */
 function attaquer(array $attaquant, array &$cible): int
 {
+    echo formaterNom($cible['nom']) . ' ! En garde, ma biquette ! Je vais vous découper le gras du cul, ça vous fera ça de moins à trimbaler !';
+
     return $cible['pv'] -= $attaquant['atk'];
 }
 
@@ -80,12 +76,7 @@ function messagePV(int $pv): void
     }
 }
 
-echo attaquer($perceval, $mordred);
-messagePV($mordred['pv']);
-
-echo attaquer($perceval, $mordred);
-messagePV($mordred['pv']);
-
-messagePV(attaquer($perceval, $mordred));
-
-
+function formaterNom(string $nom): string
+{
+    return ucfirst(strtolower($nom));
+}
