@@ -12,5 +12,28 @@ function attaquer(array $attaquant, array &$cible): int
     return $cible['pv'] -= $attaquant['atk'];
 }
 
+/**
+ * Affiche un message en fonction de la valeu des PVs.
+ * @param int $pv
+ * @return void
+ */
+function messagePV(int $pv): void
+{
+    if ($pv === 0) {
+        echo 'Vous avez toujours une mine de chiotte mais là... j\'sais pas si c\'est la lumière du feu ou quoi mais on dirait que vous êtes mort. <br>';
+    } elseif ($pv <= 50) {
+        echo 'Vous allez me faire le plaisir de faire péter cette saloperie que je puisse faire sortir la machine, hein! <br>';
+    } else {
+        echo 'Ce qu\'il y a de bien avec les opinions tranchées, c\'est qu\'ça relance le débat. En somme vous êtes une sorte de provocateur, quoi. <br>';
+    }
+}
 
-$toto = 'toto';
+/**
+ * Formate le nom avec la convention : première lettre en majuscule et le reste minuscule
+ * @param string $nom
+ * @return string
+ */
+function formaterNom(string $nom): string
+{
+    return ucfirst(strtolower($nom));
+}
