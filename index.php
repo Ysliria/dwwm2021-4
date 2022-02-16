@@ -1,6 +1,9 @@
 <?php
 declare(strict_types=1);
 
+include_once 'includes/header.php';
+//require_once 'utils.php';
+
 $merlin    = [
     'nom'        => 'Merlin',
     'profession' => 'Druide',
@@ -32,9 +35,9 @@ $mordred   = [
     'atk'        => 40
 ];
 
-switch ($arthur['profession']) {
+/*switch ($arthur['profession']) {
     case 'Chevalier':
-        echo 'Sir ! On en a gros! <br>';
+        echo 'Sir ! On en a gros ! <br>';
         break;
     case 'Druide':
         echo 'Franchement, une potion pour faire pisser bleu, ça presse forcément la minute ? <br>';
@@ -47,21 +50,11 @@ switch ($arthur['profession']) {
         break;
     default:
         echo 'Où elle est la poulette ? <br>';
-}
+}*/
+
 
 /**
- * @param array $attaquant
- * @param array $cible
- * @return int
- */
-function attaquer(array $attaquant, array &$cible): int
-{
-    echo formaterNom($cible['nom']) . ' ! En garde, ma biquette ! Je vais vous découper le gras du cul, ça vous fera ça de moins à trimbaler !';
-
-    return $cible['pv'] -= $attaquant['atk'];
-}
-
-/**
+ * Affiche un message en fonction de la valeu des PVs.
  * @param int $pv
  * @return void
  */
@@ -76,6 +69,11 @@ function messagePV(int $pv): void
     }
 }
 
+/**
+ * Formate le nom avec la convention : première lettre en majuscule et le reste minuscule
+ * @param string $nom
+ * @return string
+ */
 function formaterNom(string $nom): string
 {
     return ucfirst(strtolower($nom));
