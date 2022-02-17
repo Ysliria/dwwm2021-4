@@ -5,6 +5,18 @@ declare(strict_types=1);
 include_once 'includes/header.php';
 require_once 'utils.php';
 
+try {
+    $dbconnect = new PDO('mysql:dbname=dwwm2021-4;host=127.0.0.1', 'root');
+} catch (PDOException $exception) {
+    print "Erreur !: " . $exception->getMessage() . "<br/>";
+    die();
+}
+
+$query = $dbconnect->query('SELECT * FROM legende;');
+$results = $query->fetchAll(PDO::FETCH_ASSOC);
+
+
+
 
 $merlin    = [
         'nom'        => 'Merlin',
@@ -39,15 +51,28 @@ $mordred   = [
 
 ?>
 
-    <!--    <table>
-        <?php
-    /*foreach($array as $key=>$value): */ ?>
-            <tr>
-                <td><? /*= $key; */ ?></td>
-            </tr>
-        <?php
-    /*endforeach; */ ?>
-    </table>-->
+
+
+    <table class="table table-hover">
+        <thead>
+        <tr class="table-dark">
+            <th scope="col">Nom</th>
+            <th scope="col">Profession</th>
+            <th scope="col">Points de vie</th>
+            <th scope="col">Attaque</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach($results as $result): ?>
+        <tr>
+            <th scope="row"><?= $result['nom'] ?></th>
+            <td><?= $result['profession'] ?></td>
+            <td><?= $result['pv'] ?></td>
+            <td><?= $result['atk'] ?></td>
+        </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
 
     <form action="traitement.php" method="post">
         <div class="form-group">
