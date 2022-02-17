@@ -1,6 +1,8 @@
 <?php
 
-var_dump($_POST);
+require_once 'utils/legendeRequest.php';
+
+session_start();
 
 $nom        = htmlentities($_POST['nom']);
 $profession = htmlentities($_POST['profession']);
@@ -13,5 +15,11 @@ $personnage['profession'] = $profession ?? 'aucune';
 $personnage['pv']         = abs($pv) ?? '0';
 $personnage['atk']        = abs($atk) ?? '0';
 
-var_dump($personnage);
+
+if (createPersonnage($dbconnect, $personnage)) {
+    $_SESSION['creation'] = 'success';
+    header('Location: /');
+} else {
+    $_SESSION['creation'] = 'danger';
+}
 

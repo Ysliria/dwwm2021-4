@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+session_start();
 
 include_once 'includes/header.php';
 require_once 'utils/utils.php';
@@ -8,38 +9,22 @@ require_once 'utils/legendeRequest.php';
 
 $legendes = getListePersonnage($dbconnect);
 
-$merlin    = [
-        'nom'        => 'Merlin',
-        'profession' => 'Druide',
-        'pv'         => 200,
-        'atk'        => 80
-];
-$arthur    = [
-        'nom'        => 'Arthur',
-        'profession' => 'Roi',
-        'pv'         => 400,
-        'atk'        => 60
-];
-$guenievre = [
-        'nom'        => 'Guenièvre',
-        'profession' => 'Reine',
-        'pv'         => 100,
-        'atk'        => 20
-];
-$perceval  = [
-        'nom'        => 'Perceval',
-        'profession' => 'Chevalier',
-        'pv'         => 300,
-        'atk'        => 40
-];
-$mordred   = [
-        'Mordred',
-        'Chevalier',
-        400,
-        40
-];
+if (isset($_SESSION['creation']) && $_SESSION['creation'] === 'success') {
+    echo '<div class="alert alert-' . $_SESSION['creation'] . '">
+    Tout c\'est bien passé !
+    </div>';
+} elseif (isset($_SESSION['creation']) && $_SESSION['creation'] === 'danger') {
+    echo '<div class="alert alert-' . $_SESSION['creation'] . '">
+    Une erreur est survenue !
+    </div>';
+}
+
+
 
 ?>
+    <div class="alert alert-<?=$_SESSION['creation'] ?>">
+        tout c'est bien passé !
+    </div>
 
     <section class="mt-5 mb-3">
         <h1>Les personnages</h1>
@@ -51,7 +36,7 @@ $mordred   = [
                 <th scope="col">Profession</th>
                 <th scope="col">Points de vie</th>
                 <th scope="col">Attaque</th>
-                <th scope="col">Détails</th>
+                <th scope="col">Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -62,7 +47,9 @@ $mordred   = [
                     <td><?= $legend['profession'] ?></td>
                     <td><?= $legend['pv'] ?></td>
                     <td><?= $legend['atk'] ?></td>
-                    <td><a href="/personnage.php?id=<?= $legend['id'] ?>">details</a></td>
+                    <td>
+                        <a href="/personnage.php?id=<?= $legend['id'] ?>">Détails</a>
+                    </td>
                 </tr>
             <?php
             endforeach; ?>

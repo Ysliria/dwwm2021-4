@@ -1,7 +1,7 @@
 <?php
-
 include_once 'includes/header.php';
 require_once 'utils/legendeRequest.php';
+
 
 $id         = (int)htmlentities($_GET['id']);
 $personnage = getPersonnageById($dbconnect, $id);
