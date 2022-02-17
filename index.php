@@ -12,10 +12,7 @@ try {
     die();
 }
 
-$query = $dbconnect->query('SELECT * FROM legende;');
-$results = $query->fetchAll(PDO::FETCH_ASSOC);
-
-
+$legendes = $dbconnect->query('SELECT * FROM legende;')->fetchAll(PDO::FETCH_ASSOC);
 
 
 $merlin    = [
@@ -52,7 +49,6 @@ $mordred   = [
 ?>
 
 
-
     <table class="table table-hover">
         <thead>
         <tr class="table-dark">
@@ -60,17 +56,21 @@ $mordred   = [
             <th scope="col">Profession</th>
             <th scope="col">Points de vie</th>
             <th scope="col">Attaque</th>
+            <th scope="col">Détails</th>
         </tr>
         </thead>
         <tbody>
-        <?php foreach($results as $result): ?>
-        <tr>
-            <th scope="row"><?= $result['nom'] ?></th>
-            <td><?= $result['profession'] ?></td>
-            <td><?= $result['pv'] ?></td>
-            <td><?= $result['atk'] ?></td>
-        </tr>
-        <?php endforeach; ?>
+        <?php
+        foreach ($legendes as $legend): ?>
+            <tr>
+                <th scope="row"><?= $legend['nom'] ?></th>
+                <td><?= $legend['profession'] ?></td>
+                <td><?= $legend['pv'] ?></td>
+                <td><?= $legend['atk'] ?></td>
+                <td><a href="/personnage.php?id=<?=$legend['id']?>">details</a></td>
+            </tr>
+        <?php
+        endforeach; ?>
         </tbody>
     </table>
 
