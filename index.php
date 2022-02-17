@@ -116,9 +116,7 @@ $mordred   = [
         </form>
     </section>
 
-
 <?php
-
 
 /*switch ($arthur['profession']) {
     case 'Chevalier':

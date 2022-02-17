@@ -3,10 +3,8 @@
 include_once 'includes/header.php';
 require_once 'utils/legendeRequest.php';
 
-$id      = (int)htmlentities($_GET['id']);
-$request = $dbconnect->prepare('SELECT * FROM legende WHERE id = :id');
-$request->execute([':id' => $id]);
-$personnage = $request->fetch(PDO::FETCH_ASSOC);
+$id         = (int)htmlentities($_GET['id']);
+$personnage = getPersonnageById($dbconnect, $id);
 
 ?>
 
