@@ -1,17 +1,26 @@
 <?php
 
 include_once 'includes/header.php';
+require_once 'utils/legendeRequest.php';
 
-echo $_GET['id'];
+$id      = (int)htmlentities($_GET['id']);
+$request = $dbconnect->prepare('SELECT * FROM legende WHERE id = :id');
+$request->execute([':id' => $id]);
+$personnage = $request->fetch(PDO::FETCH_ASSOC);
 
-try {
-    $dbconnect = new PDO('mysql:dbname=dwwm2021-4;host=127.0.0.1', 'root');
-} catch (PDOException $exception) {
-    print "Erreur !: " . $exception->getMessage() . "<br/>";
-    die();
-}
+?>
 
-$personnage = $dbconnect->prepare('SELECT nom FROM legende WHERE id = :id');
-$personnage->execute([':id' => 1]);
+    <div class="card text-white bg-primary mb-3 mt-5">
+        <div class="card-header"><?= $personnage['profession'] ?></div>
+
+        <div class="card-body">
+            <h4 class="card-title"><?= $personnage['nom'] ?></h4>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet atque consequatur
+                doloribus earum esse facere harum hic incidunt laboriosam laudantium modi necessitatibus odio placeat
+                praesentium, repellendus sed, sunt, veniam. Earum?.</p>
+        </div>
+    </div>
+
+<?php
 
 include_once 'includes/footer.php';
